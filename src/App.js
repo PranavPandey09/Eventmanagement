@@ -1,25 +1,35 @@
-import logo from './logo.svg';
+// const client = new Client();
+// client.setProject('670caf66000c9acc6853');
+
+
+import React, { useState } from 'react';
+import EventForm from './components/EventForm';
+import EventList from './components/EventList';
 import './App.css';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
+const App = () => {
+    const [eventToEdit, setEventToEdit] = useState(null);
+
+    const handleEdit = (event) => {
+        setEventToEdit(event);
+    };
+
+    const handleUpdate = () => {
+        setEventToEdit(null); // Clear the edit form once updated
+    };
+
+    return (
+        <div className="app">
+            <h1>Event Management</h1>
+
+            {/* Event Form */}
+            <EventForm eventToEdit={eventToEdit} onUpdate={handleUpdate} />
+
+            {/* Event List */}
+            <EventList onEdit={handleEdit} />
+        </div>
+    );
+};
 
 export default App;
+
